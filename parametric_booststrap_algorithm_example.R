@@ -25,10 +25,10 @@ for (i in 1:n_samples){
 hist(my_means)
 
 # We calculate our best point estimate of the population mean.
-mean(my_means)
+fin_sample_mean <- mean(my_means)
 
 # Our interest here is the sd of our means, which will be the bootstrap estimate of the SE.
-sd(my_means)
+stand_err <- sd(my_means)
 
 # To find the confidence interval, we could use this and the 97.5 percentile of the normal distribution
 # (which you know to be 1.96) and create a confidence interval. Better yet, we could use a percentile of 
@@ -41,10 +41,10 @@ sd(my_means)
 my_means <- sort(my_means)
 
 # For a 95% interval, we need to cut off 2.5% off of each end. How many values is that?
-0.025 * n_samples
+cut_off <- 0.025 * n_samples
 
 # We want to cut off 250 from each end. That means I want to retain the 251st value
 # in my ordered listed of means all the way to the 9750th value. Let's look at the two ends of the retained list.
-c(my_means[251], my_means[9750])
+confid_int_limits <- c(my_means[cut_off + 1], my_means[n_samples - cut_off])
 
 
